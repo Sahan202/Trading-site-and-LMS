@@ -1,0 +1,73 @@
+@media (max-width: 700px) {
+  .student-stories-section .achievement-track,
+  .student-stories-section .testimonial-track {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 14px;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .student-stories-section .achievement-card,
+  .student-stories-section .testimonial-card {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+    scroll-snap-align: none;
+  }
+
+  .student-stories-section .achievement-card {
+    padding: 8px;
+    border-radius: 12px;
+  }
+
+  .student-stories-section .achievement-card > img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+  }
+
+  .student-stories-section .testimonial-card {
+    padding: 14px 12px;
+    border-radius: 12px;
+  }
+
+  .student-stories-section .testimonial-person {
+    gap: 7px;
+    margin-bottom: 10px;
+  }
+
+  .student-stories-section .testimonial-person span {
+    width: 28px;
+    height: 28px;
+    font-size: 10px;
+  }
+
+  .student-stories-section .testimonial-person h4 {
+    min-width: 0;
+    font-size: 12px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+
+  .student-stories-section .testimonial-card p {
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-line-clamp: 7;
+    overflow-wrap: anywhere;
+  }
+
+  .student-stories-section .testimonial-expand {
+    font-size: 11px;
+  }
+
+  .student-stories-section .achievement-block .story-carousel-controls,
+  .student-stories-section .testimonial-block .story-carousel-controls {
+    display: none;
+  }
+}

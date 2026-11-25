@@ -1,0 +1,10 @@
+/* Touch taps open the review directly; decorative cursors are desktop-only. */
+@media (hover: none), (pointer: coarse) {
+  .testimonial-card {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .testimonial-card .testimonial-card-cursor {
+    display: none;
+  }
+}

@@ -1,0 +1,203 @@
+.meet-copy .mentor-role {
+  margin: 16px 0 0;
+  color: #9ab3ff;
+  font-family: 'Section Inter', Inter, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.home .meet-description.mentor-bio {
+  width: auto;
+  max-width: 550px;
+  min-height: 0;
+  margin: 18px 0 24px;
+}
+
+.mentor-bio p {
+  margin: 0 0 14px;
+}
+
+.mentor-bio .mentor-motto {
+  margin-bottom: 0;
+  color: #dce5ff;
+  font-weight: 600;
+}
+.mentor-results {
+  padding: 12px;
+  border: 1px solid rgba(86, 216, 255, 0.2);
+  border-radius: 22px;
+  background: linear-gradient(
+    145deg,
+    rgba(24, 44, 72, 0.65),
+    rgba(9, 19, 36, 0.8)
+  );
+  width: 100%;
+  max-width: 920px;
+  margin: 36px auto 0;
+}
+
+.mentor-result-card {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(86, 216, 255, 0.22);
+  border-radius: 16px;
+  background: rgba(9, 25, 43, 0.65);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+.mentor-result-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.mentor-result-card:focus-visible {
+  outline: 2px solid #56d8ff;
+  outline-offset: 4px;
+}
+
+@media (max-width: 700px) {
+  .mentor-results {
+    padding: 8px;
+    margin-top: 24px;
+  }
+}
+
+.mentor-result-card[hidden] {
+  display: none;
+}
+.mentor-result-stage {
+  aspect-ratio: 1280 / 660;
+}
+.mentor-result-card img {
+  aspect-ratio: 1280 / 660;
+  object-fit: contain;
+}
+.mentor-result-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 4px 2px;
+}
+.mentor-result-controls button {
+  display: grid;
+  place-items: center;
+  min-width: 32px;
+  min-height: 32px;
+  border: 1px solid rgba(86, 216, 255, 0.22);
+  border-radius: 50%;
+  background: rgba(86, 216, 255, 0.06);
+  color: #bdeeff;
+  cursor: pointer;
+}
+.mentor-result-controls .mentor-result-dot {
+  min-width: 9px;
+  min-height: 9px;
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  background: #45516d;
+  border: 0;
+}
+.mentor-result-dot[aria-pressed='true'] {
+  background: #56d8ff;
+  box-shadow: 0 0 12px rgba(86, 216, 255, 0.4);
+}
+.mentor-result-controls .mentor-result-pause {
+  border-radius: 20px;
+  padding: 0 12px;
+  font-size: 11px;
+}
+.mentor-result-controls button:focus-visible {
+  outline: 2px solid #56d8ff;
+  outline-offset: 3px;
+}
+
+.mentor-result-stage {
+  overflow: hidden;
+  border-radius: 16px;
+}
+.mentor-result-track {
+  display: flex;
+  width: 100%;
+  transition: transform 650ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.mentor-result-track .mentor-result-card {
+  flex: 0 0 100%;
+  width: 100%;
+  padding: 0;
+  cursor: zoom-in;
+}
+.mentor-result-modal {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 24px;
+  border: 0;
+  background: rgba(3, 9, 22, 0.9);
+  color: white;
+}
+.mentor-result-modal[open] {
+  display: grid;
+  place-items: center;
+}
+.mentor-result-modal::backdrop {
+  background: rgba(3, 9, 22, 0.65);
+  backdrop-filter: blur(8px);
+}
+.mentor-result-modal-content {
+  position: relative;
+  width: min(1280px, 100%);
+}
+.mentor-result-modal-content img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: calc(100dvh - 100px);
+  object-fit: contain;
+  border-radius: 14px;
+}
+.mentor-result-modal-close {
+  position: absolute;
+  right: 0;
+  top: -44px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(86, 216, 255, 0.4);
+  border-radius: 50%;
+  color: white;
+  background: #10233f;
+  font-size: 26px;
+  cursor: pointer;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mentor-result-track {
+    transition: none;
+  }
+}
+.meet-section .meet-image-wrap.meet-cover {
+  align-self: center;
+  width: 100%;
+  max-width: 100%;
+  min-height: 0;
+  height: auto;
+  aspect-ratio: 3048 / 1715;
+  border-radius: 12px;
+}
+
+.meet-section .meet-image-wrap.meet-cover img {
+  position: static;
+  display: block;
+  width: 100%;
+  min-height: 0;
+  height: auto;
+  object-fit: contain;
+  transform: none;
+}

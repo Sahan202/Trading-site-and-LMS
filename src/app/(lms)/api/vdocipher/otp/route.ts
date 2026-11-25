@@ -1,0 +1,98 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { getActiveSession } from '@/lib/supabase/active-session';
+
+export async function POST(request: NextRequest) {
+  const activeSession = await getActiveSession(request);
+  if (!activeSession)
+    return NextResponse.json(
+      { error: 'Your session is no longer active. Please sign in again.' },
+      { status: 401 }
+    );
+  const { supabase, user } = activeSession;
+  const { videoId, lessonId } = (await request.json()) as {
+    videoId?: string;
+    lessonId?: string;
+  };
+  if (!videoId || !/^[a-zA-Z0-9_-]+$/.test(videoId))
+    return NextResponse.json(
+      { error: 'A valid VdoCipher video ID is required.' },
+      { status: 400 }
+    );
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('role,approval_status')
+    .eq('id', user.id)
+    .maybeSingle();
+  const staff = ['instructor', 'admin', 'super_admin'].includes(
+    profile?.role ?? ''
+  );
+  let lessonQuery = supabase
+    .from('lessons')
+    .select('id,course_id,courses!inner(published)')
+    .eq('vdocipher_video_id', videoId);
+  // The same recording can belong to multiple batches. Authorize the selected
+  // lesson instead of assuming its video ID identifies a unique lesson.
+  if (lessonId) lessonQuery = lessonQuery.eq('id', lessonId);
+  const { data: lesson } = await lessonQuery.maybeSingle();
+  const course = Array.isArray(lesson?.courses)
+    ? lesson.courses[0]
+    : lesson?.courses;
+  if (!lesson || !course?.published)
+    return NextResponse.json(
+      { error: 'Video is not available.' },
+      { status: 404 }
+    );
+  const { data: canAccess, error: accessError } = await supabase.rpc(
+    'can_access_lesson',
+    { target_lesson_id: lesson.id, target_course_id: lesson.course_id }
+  );
+  if (accessError)
+    return NextResponse.json(
+      { error: 'Could not verify video permission.' },
+      { status: 500 }
+    );
+  if (!canAccess)
+    return NextResponse.json({ error: 'Not approved' }, { status: 403 });
+  if (!staff) {
+    if (profile?.approval_status !== 'approved')
+      return NextResponse.json(
+        { error: 'Your account is not approved.' },
+        { status: 403 }
+      );
+    const { data: enrollment } = await supabase
+      .from('enrollments')
+      .select('id')
+      .eq('student_id', user.id)
+      .eq('course_id', lesson.course_id)
+      .maybeSingle();
+    if (!enrollment)
+      return NextResponse.json(
+        { error: 'You are not enrolled in this course.' },
+        { status: 403 }
+      );
+  }
+  const secret = process.env.VDOCIPHER_API_SECRET;
+  if (!secret)
+    return NextResponse.json(
+      { error: 'VdoCipher is not configured.' },
+      { status: 500 }
+    );
+  const response = await fetch(
+    `https://dev.vdocipher.com/api/videos/${videoId}/otp`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Apisecret ${secret}`,
+        'Content-Type': 'application/json',
+      },
+      cache: 'no-store',
+    }
+  );
+  const data: unknown = await response.json();
+  if (!response.ok)
+    return NextResponse.json(
+      { error: 'VdoCipher OTP request failed.' },
+      { status: response.status }
+    );
+  return NextResponse.json(data);
+}

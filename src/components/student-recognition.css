@@ -1,0 +1,149 @@
+.student-recognition {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(28px, 4vw, 56px);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1280px;
+  margin: 56px auto 64px;
+  font-family: 'Section Inter', Inter, Arial, sans-serif;
+}
+
+.student-recognition-copy {
+  min-width: 0;
+}
+
+.student-recognition-copy h2 {
+  margin: 0 0 22px;
+  color: #fff;
+  font-size: clamp(27px, 3vw, 40px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.7px;
+  text-wrap: balance;
+}
+
+.student-recognition-copy h2 span {
+  display: inline-block;
+  font-size: 0.75em;
+}
+
+.student-recognition-copy p {
+  margin: 0 0 16px;
+  color: #b7bfd7;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.student-recognition-copy .student-recognition-congratulations {
+  margin-bottom: 0;
+  color: #d8e2ff;
+  font-weight: 600;
+}
+
+.student-recognition-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #29385e;
+  border-radius: 14px;
+  background: #060d25;
+  box-shadow: 0 16px 48px #00031b44;
+}
+
+.student-recognition-track {
+  display: flex;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.student-recognition-track::-webkit-scrollbar {
+  display: none;
+}
+
+.student-recognition-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  margin: 0;
+  scroll-snap-align: start;
+}
+
+.student-recognition-slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1280 / 853;
+  object-fit: contain;
+}
+
+.student-recognition-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 14px;
+  border-top: 1px solid #29385e;
+}
+
+.student-recognition-dots {
+  display: flex;
+}
+
+.student-recognition-dots button {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.student-recognition-dots button span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #46506e;
+}
+
+.student-recognition-dots button.is-active span {
+  background: #6c8cff;
+  box-shadow: 0 0 10px #5378ff66;
+}
+
+.student-recognition-pause {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: #bcc8e8;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.student-recognition-controls button:focus-visible {
+  outline: 2px solid #93aaff;
+  outline-offset: 2px;
+}
+
+@media (max-width: 800px) {
+  .student-recognition {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    margin: 40px auto 48px;
+  }
+
+  .student-recognition-card {
+    width: 100%;
+    max-width: 680px;
+    justify-self: center;
+  }
+}
